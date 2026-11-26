@@ -911,6 +911,130 @@
         status.textContent = "Could not request notification permission.";
       }
     }
+
+<!-- TECHNOVA ADMIN LOGIN -->
+<section id="adminLogin" class="admin-container">
+  <div class="admin-box">
+    <h2>TechNova Admin</h2>
+    <p>Authorized access only</p>
+
+    <input type="email" id="adminEmail"
+      placeholder="Admin Email">
+
+    <input type="password" id="adminPassword"
+      placeholder="Admin Password">
+
+    <button onclick="adminLogin()">Login</button>
+
+    <p id="loginMessage"></p>
+  </div>
+</section>
+
+<section id="adminDashboard" style="display:none;">
+  <h2>TechNova Dashboard</h2>
+  <h3>Welcome, Administrator</h3>
+
+  <input id="projectName"
+    placeholder="Project Name">
+
+  <input id="projectDescription"
+    placeholder="Project Description">
+
+  <button onclick="addProject()">Add Project</button>
+
+  <div id="projectList"></div>
+
+  <button onclick="adminLogout()">Logout</button>
+</section>
+
+<style>
+.admin-container {
+  min-height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #101c2c;
+  padding: 20px;
+}
+
+.admin-box {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 350px;
+  text-align: center;
+}
+
+.admin-box h2 {
+  color: #101c2c;
+}
+
+.admin-box input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  box-sizing: border-box;
+}
+
+.admin-box button,
+#adminDashboard button {
+  background: #d4af37;
+  color: #101c2c;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 7px;
+  cursor: pointer;
+}
+</style>
+
+const ADMIN_EMAIL = "your-email@gmail.com";
+const ADMIN_PASSWORD = "12345678";
+
+function adminLogin() {
+  const email = document.getElementById("adminEmail").value;
+  const password = document.getElementById("adminPassword").value;
+
+  if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+    document.getElementById("adminLogin").style.display = "none";
+    document.getElementById("adminDashboard").style.display = "block";
+    document.getElementById("loginMessage").textContent = "";
+  } else {
+    document.getElementById("loginMessage").textContent =
+      "Incorrect email or password!";
+  }
+}
+
+function adminLogout() {
+  document.getElementById("adminDashboard").style.display = "none";
+  document.getElementById("adminLogin").style.display = "flex";
+}
+
+function addProject() {
+  const name = document.getElementById("projectName").value.trim();
+  const description = document.getElementById("projectDescription").value.trim();
+
+  if (!name || !description) {
+    alert("Please complete both fields.");
+    return;
+  }
+
+  const project = document.createElement("div");
+  const heading = document.createElement("h3");
+  const paragraph = document.createElement("p");
+
+  heading.textContent = name;
+  paragraph.textContent = description;
+
+  project.appendChild(heading);
+  project.appendChild(paragraph);
+
+  document.getElementById("projectList").appendChild(project);
+
+  document.getElementById("projectName").value = "";
+  document.getElementById("projectDescription").value = "";
+}
+
   </script>
 </body>
 </html>
