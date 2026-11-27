@@ -1036,6 +1036,46 @@ function addProject() {
   document.getElementById("projectDescription").value = "";
 }
   </script>
+  
+<script>
+(function () {
+  const timer = document.getElementById("timer");
+
+  if (!timer) return;
+
+  const launchTime = new Date(
+    "2027-01-01T00:00:00+01:00"
+  ).getTime();
+
+  let countdownInterval;
+
+  function refreshTechNovaCountdown() {
+    const distance = launchTime - Date.now();
+
+    if (distance <= 0) {
+      timer.textContent = "TECHNOVA IS LIVE!";
+      clearInterval(countdownInterval);
+      return;
+    }
+
+    const days = Math.floor(distance / 86400000);
+    const hours = Math.floor((distance / 3600000) % 24);
+    const minutes = Math.floor((distance / 60000) % 60);
+    const seconds = Math.floor((distance / 1000) % 60);
+
+    timer.textContent =
+      `${days} Days : ${hours} Hours : ${minutes} Minutes : ${seconds} Seconds`;
+  }
+
+  refreshTechNovaCountdown();
+
+  countdownInterval = setInterval(
+    refreshTechNovaCountdown,
+    1000
+  );
+})();
+</script>
+
 </body>
 </html>
 
