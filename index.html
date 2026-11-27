@@ -1074,6 +1074,21 @@ function addProject() {
     1000
   );
 })();
+  function openWebsite() {
+    const cover = document.querySelector('.cover');
+    const website = document.getElementById('website');
+
+    if (cover) {
+        cover.style.display = 'none';
+    }
+
+    if (website) {
+        website.classList.remove('hidden');
+        website.style.display = 'block';
+    }
+
+    window.scrollTo(0, 0);
+  }
 </script>
 
 </body>
